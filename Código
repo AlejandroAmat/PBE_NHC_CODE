@@ -16,3 +16,10 @@ def read_uid
 
 		end
 end
+if __FILE__ == $0
+
+	rf= Rfid.new        #Crea una nueva instancia de la clase Rfid
+	puts "Autentificación requerida"
+	uid = rf.read_uid   #llama a la función read_uid de la clase Rfid, retornando uid
+	puts uid            #muestra por pantalla el uid
+end
