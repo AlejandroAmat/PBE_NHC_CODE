@@ -1,0 +1,18 @@
+require 'ruby-nfc'
+
+class Rfid
+#obtenemos a todos los lectores disponibles nhc con ruby-nfc
+@@readers = NFC::Reader.all #En ruby, las variables locales de declaran con @@
+
+
+def read_uid
+			@@readers[0].poll(Mifare::Classic::Tag) do |tag| #del lector obtenemos el tag de nuestra "tarjeta" gracias a la librería freeware
+			begin
+					#uid = tag.uid_hex ---- Primer método. Más sencillo pero no en mayúsculas
+					uid = tag.to_s.split()[0].upcase  #segundo método. Cogemos el valor de tag, lo pasamos a string y separamos por espacios, ya que de por si viene HEX Mifare classis 4k.. Nos quedamos con el primer valor (hex
+					return uid
+			end
+	        end
+
+		end
+end
